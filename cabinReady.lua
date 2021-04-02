@@ -107,6 +107,8 @@ function cabinReadyDeparture()
     if (isReadyForDeparture == true and mainDoor == 1) then
         isReadyForDeparture = false
         startTime = 0
+		endTime = 0
+		toMemoAutoAppearTime = 0
         print("[CabinReady] Departure reset at: " .. os.date('%H:%M:%S', os.time()))
     end
 end
