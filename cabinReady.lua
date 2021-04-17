@@ -14,9 +14,9 @@ isAirbus = false
 -- Required datarefs
 -- Set door and apPhase if datarefs are found only
 if XPLMFindDataRef("AirbusFBW/PaxDoorArray") and  XPLMFindDataRef("AirbusFBW/APPhase") ~= nil then
-	isAirbus = true
+    isAirbus = true
     dataref("mainDoor", "AirbusFBW/PaxDoorArray", "readonly", 0)
-	dataref("apPhase", "AirbusFBW/APPhase") -- ap phases (1 = TO, 2=climb, 3=cruize, 4 descend, 5= approach, 6 = GA)
+    dataref("apPhase", "AirbusFBW/APPhase") -- ap phases (1 = TO, 2=climb, 3=cruize, 4 descend, 5= approach, 6 = GA)
 end
 
 
@@ -116,8 +116,8 @@ function cabinReadyDeparture()
     if (isReadyForDeparture == true and mainDoor == 1) then
         isReadyForDeparture = false
         startTime = 0
-		endTime = 0
-		toMemoAutoAppearTime = 0
+        endTime = 0
+        toMemoAutoAppearTime = 0
         print("[CabinReady] Departure reset at: " .. os.date('%H:%M:%S', os.time()))
     end
 end
@@ -132,5 +132,5 @@ end
 
 -- Will be executed if Toliss DataRefs exists only
 if isAirbus then
-	do_every_draw("mainCabinReady()")
+    do_every_draw("mainCabinReady()")
 end
