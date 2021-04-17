@@ -8,9 +8,18 @@
 -- Set to 1 to see two log messages, one prior TO and one while in approach. Just as a reminder and to verify that it works...
 cabinReadyDebug = 1
 
+-- Helper to see if it is a Toliss Airbus
+isAirbus = false
+
 -- Required datarefs
-dataref("mainDoor", "AirbusFBW/PaxDoorArray", "readonly", 0)
-dataref("apPhase", "AirbusFBW/APPhase") -- ap phases (1 = TO, 2=climb, 3=cruize, 4 descend, 5= approach, 6 = GA)
+-- Set door and apPhase if datarefs are found only
+if XPLMFindDataRef("AirbusFBW/PaxDoorArray") and  XPLMFindDataRef("AirbusFBW/APPhase") ~= nil then
+	isAirbus = true
+    dataref("mainDoor", "AirbusFBW/PaxDoorArray", "readonly", 0)
+	dataref("apPhase", "AirbusFBW/APPhase") -- ap phases (1 = TO, 2=climb, 3=cruize, 4 descend, 5= approach, 6 = GA)
+end
+
+
 dataref("agl", "sim/flightmodel/position/y_agl") -- in meters
 dataref("gen1", "sim/cockpit/electrical/generator_on", "readonly", 0)
 dataref("gen2", "sim/cockpit/electrical/generator_on", "readonly", 1)
@@ -121,4 +130,7 @@ function mainCabinReady()
     end
 end
 
-do_every_draw("mainCabinReady()")
+-- Will be executed if Toliss DataRefs exists only
+if isAirbus then
+	do_every_draw("mainCabinReady()")
+end
